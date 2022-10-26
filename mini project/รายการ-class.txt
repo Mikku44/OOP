@@ -8,7 +8,7 @@ Noodle program
 	setMoney()
 	setChange()
 	
-2.class main
+2.class NoodleService
 	gui
 	
 
