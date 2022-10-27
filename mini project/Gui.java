@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 
 public class Gui {
     protected static Color primaryColor = new Color(255,240,240);
     protected static Color secondaryColor = new Color(255,  200 , 100);
-
+    protected static Noodle n = new Noodle();
     public static void main(String[] args){
         JFrame frame  = new JFrame("Noodle NOOB");
         JPanel panel = new JPanel();
@@ -17,6 +19,7 @@ public class Gui {
         JPanel panelButtom = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
+        JPanel emptyPanel = new JPanel();
         JLabel title  = new JLabel("NOODLE NOOB");
         JLabel description = new JLabel("Noodles :");
         JLabel Cdescription = new JLabel("Do you want cathchop :");
@@ -27,6 +30,8 @@ public class Gui {
 
         JTextField amountTF = new JTextField(10);
 
+        
+
         //?Noodles
         JButton Nbtn1 = new JButton("Yellow Noodles");
         JButton Nbtn2 = new JButton("Rice Vermicelli");
@@ -34,18 +39,27 @@ public class Gui {
         Nbtn1.setBackground(primaryColor);
         Nbtn2.setBackground(primaryColor);
         Nbtn3.setBackground(primaryColor);
+        Nbtn1.addActionListener(NoodlesBtn);
+        Nbtn2.addActionListener(NoodlesBtn);
+        Nbtn3.addActionListener(NoodlesBtn);
         
         //?cathchup
         JButton Cbtn1 = new JButton("Yes");
         JButton Cbtn2 = new JButton("No");
         Cbtn1.setBackground(primaryColor);
         Cbtn2.setBackground(primaryColor);
+        Cbtn1.addActionListener(x);
+        Cbtn2.addActionListener(x);
+       
         
         //?Soup
         JButton Sbtn1 = new JButton("Tomyam soup");
         JButton Sbtn2 = new JButton("Paloo soup");
         Sbtn1.setBackground(primaryColor);
         Sbtn2.setBackground(primaryColor);
+        Sbtn1.addActionListener(x);
+        Sbtn2.addActionListener(x);
+
         
         //?Meat
         JButton Mbtn1 = new JButton("Chicken");
@@ -56,12 +70,24 @@ public class Gui {
         Mbtn2.setBackground(primaryColor);
         Mbtn3.setBackground(primaryColor);
         Mbtn4.setBackground(primaryColor);
+        Mbtn1.addActionListener(x);
+        Mbtn2.addActionListener(x);
+        Mbtn3.addActionListener(x);
+        Mbtn4.addActionListener(x);
         
         //? Price
         JButton Pbtn = new JButton("25 ฿");
         JButton Pbtn1 = new JButton("30 ฿");
         Pbtn.setBackground(primaryColor);
         Pbtn1.setBackground(primaryColor);
+        Pbtn.addActionListener(x);
+        Pbtn.addActionListener(x);
+
+        //?Option
+        JButton oBtn = new JButton("Continue");
+        oBtn.setBackground(primaryColor);
+        oBtn.addActionListener(orderMenu);
+        
         
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         // frame.setLayout(new GridLayout(0,1));
@@ -104,15 +130,20 @@ public class Gui {
         panelCenter4.add(Pbtn);
         panelCenter4.add(Pbtn1);
 
+        emptyPanel.setBackground(Color.white);
+
         panelLeft.setLayout(new GridLayout(0,1));
         panelLeft.add(panelCenter);
-        panelLeft.add(panelCenter1);
-        panelLeft.add(panelCenter2);
         panelLeft.add(panelCenter3);
-        panelLeft.add(panelCenter4);
-
+        panelLeft.add(emptyPanel);
+        
+        panelRight.setLayout(new GridLayout(0,1));
+        panelRight.add(panelCenter2);
+        panelRight.add(panelCenter1);
+        panelRight.add(panelCenter4);
 
         panelButtom.setBackground(Color.white);
+        panelButtom.add(oBtn);
 
         frame.setSize(800,600);
         frame.add(panel,BorderLayout.NORTH);
@@ -121,7 +152,7 @@ public class Gui {
         // frame.add(panelCenter2,BorderLayout.EAST);
         // frame.add(panelCenter3,BorderLayout.WEST);
         // frame.add(panelCenter4,BorderLayout.EAST);
-        frame.add(panelRight,BorderLayout.EAST);
+        frame.add(panelRight,BorderLayout.CENTER);
         frame.add(panelLeft,BorderLayout.WEST);
         frame.add(panelButtom,BorderLayout.SOUTH);
 
@@ -129,5 +160,72 @@ public class Gui {
 
     }
     
+    static ActionListener x = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+       
+        Source.setBackground(secondaryColor);
+    }};
+    
+    static ActionListener NoodlesBtn = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+        
+        n.setNoodle(Source.getText());
+        Source.setBackground(secondaryColor);
+    }};
+    
+    static ActionListener SoupBtn = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+        
+        n.setSoup(Source.getText());
+        Source.setBackground(secondaryColor);
+    }};
+    
+    static ActionListener TypeBtn = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+        
+        n.setTypeOfMeat(Source.getText());
+        Source.setBackground(secondaryColor);
+    }};
+    
+    static ActionListener CathchupBtn = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+        if((Source.getText()).equals("Yes")){
+                n.setCathchup(true);
+        }else{
+                n.setCathchup(false);
+            }
+    
+        Source.setBackground(secondaryColor);
+    }};
+
+    static ActionListener orderMenu = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        JLabel order = new JLabel(n.getNoodles());
+        JLabel order1 = new JLabel(Boolean.toString(n.getCathchup()));
+        JLabel order2 = new JLabel(n.getTypeOfMeat());
+        JLabel order3 = new JLabel(Integer.toString(n.getPrice()));
+        JLabel order4 = new JLabel(n.getSoup());
+        JFrame receipt = new JFrame();
+        receipt.setTitle("Order");
+        receipt.setSize(350,500);
+        receipt.add(order);
+        receipt.add(order1);
+        receipt.add(order2);
+        receipt.add(order3);
+        receipt.add(order4);
+        receipt.setVisible(true);
+    }};
+
 
 }
