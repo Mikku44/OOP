@@ -3,6 +3,9 @@ import java.awt.*;
 import java.util.Date;
 
 public class Gui {
+    protected static Color primaryColor = new Color(255,240,240);
+    protected static Color secondaryColor = new Color(255,  200 , 100);
+
     public static void main(String[] args){
         JFrame frame  = new JFrame("Noodle NOOB");
         JPanel panel = new JPanel();
@@ -12,6 +15,8 @@ public class Gui {
         JPanel panelCenter3 = new JPanel();
         JPanel panelCenter4 = new JPanel();
         JPanel panelButtom = new JPanel();
+        JPanel panelLeft = new JPanel();
+        JPanel panelRight = new JPanel();
         JLabel title  = new JLabel("NOODLE NOOB");
         JLabel description = new JLabel("Noodles :");
         JLabel Cdescription = new JLabel("Do you want cathchop :");
@@ -21,34 +26,45 @@ public class Gui {
         JLabel Pdescription = new JLabel("Price :");
 
         JTextField amountTF = new JTextField(10);
-       
 
         //?Noodles
         JButton Nbtn1 = new JButton("Yellow Noodles");
         JButton Nbtn2 = new JButton("Rice Vermicelli");
         JButton Nbtn3 = new JButton("Instant Noodles");
-        Nbtn1.setBackground(new Color(100,100,100));
-
+        Nbtn1.setBackground(primaryColor);
+        Nbtn2.setBackground(primaryColor);
+        Nbtn3.setBackground(primaryColor);
+        
         //?cathchup
         JButton Cbtn1 = new JButton("Yes");
         JButton Cbtn2 = new JButton("No");
-
+        Cbtn1.setBackground(primaryColor);
+        Cbtn2.setBackground(primaryColor);
+        
         //?Soup
         JButton Sbtn1 = new JButton("Tomyam soup");
         JButton Sbtn2 = new JButton("Paloo soup");
-
+        Sbtn1.setBackground(primaryColor);
+        Sbtn2.setBackground(primaryColor);
+        
         //?Meat
         JButton Mbtn1 = new JButton("Chicken");
         JButton Mbtn2 = new JButton("Meat");
         JButton Mbtn3 = new JButton("Fish meatball");
         JButton Mbtn4 = new JButton("None");
-
+        Mbtn1.setBackground(primaryColor);
+        Mbtn2.setBackground(primaryColor);
+        Mbtn3.setBackground(primaryColor);
+        Mbtn4.setBackground(primaryColor);
+        
         //? Price
         JButton Pbtn = new JButton("25 ฿");
         JButton Pbtn1 = new JButton("30 ฿");
-
+        Pbtn.setBackground(primaryColor);
+        Pbtn1.setBackground(primaryColor);
+        
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
-        frame.setLayout(new GridLayout(0,1));
+        // frame.setLayout(new GridLayout(0,1));
 
         panel.setBackground(Color.white);
         panel.add(title);
@@ -56,7 +72,6 @@ public class Gui {
         title.setFont(new Font("Arial", Font.BOLD,24));
 
         panelCenter.setBackground(Color.white);
-        // panelCenter.setLayout(new GridLayout());
         panelCenter.add(description);
         panelCenter.add(Nbtn1);
         panelCenter.add(Nbtn2);
@@ -89,15 +104,25 @@ public class Gui {
         panelCenter4.add(Pbtn);
         panelCenter4.add(Pbtn1);
 
+        panelLeft.setLayout(new GridLayout(0,1));
+        panelLeft.add(panelCenter);
+        panelLeft.add(panelCenter1);
+        panelLeft.add(panelCenter2);
+        panelLeft.add(panelCenter3);
+        panelLeft.add(panelCenter4);
+
+
         panelButtom.setBackground(Color.white);
 
         frame.setSize(800,600);
         frame.add(panel,BorderLayout.NORTH);
-        frame.add(panelCenter,BorderLayout.CENTER);
-        frame.add(panelCenter1,BorderLayout.CENTER);
-        frame.add(panelCenter2,BorderLayout.CENTER);
-        frame.add(panelCenter3,BorderLayout.CENTER);
-        frame.add(panelCenter4,BorderLayout.CENTER);
+        // frame.add(panelCenter,BorderLayout.EAST);
+        // frame.add(panelCenter1,BorderLayout.WEST);
+        // frame.add(panelCenter2,BorderLayout.EAST);
+        // frame.add(panelCenter3,BorderLayout.WEST);
+        // frame.add(panelCenter4,BorderLayout.EAST);
+        frame.add(panelRight,BorderLayout.EAST);
+        frame.add(panelLeft,BorderLayout.WEST);
         frame.add(panelButtom,BorderLayout.SOUTH);
 
         frame.setVisible(true);
