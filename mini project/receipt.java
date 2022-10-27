@@ -2,11 +2,11 @@ import java.sql.Date;
 
 public class receipt {
     // กำหนดคุณสมบัติ
-    Date dateOrder;
-    String userName;
-    String[] orderMenu;
-    int amountMenu;
-    int total;
+    private Date dateOrder;
+    private String userName;
+    private String[] orderMenu;
+    private int amountMenu;
+    private int total;
 
     // Method สำหรับ วันที่สั่งซื้อ
     public void setdateOrder(Date dateOrder) {
