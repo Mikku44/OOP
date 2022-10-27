@@ -18,3 +18,20 @@ public class Payment {
     public void setchange(int change) {
         this.change = change;
     }
+    ////////////////////////////////////////////////////////////////////////
+
+    // Method สำหรับไว้ให้เรียกดู
+    public String getPayment() {
+        return this.typePayment;
+    }
+
+    // Method สำหรับไว้ให้เรียกดู
+    public String getPay() {
+        return this.pay;
+    }
+
+    // Method สำหรับไว้ให้เรียกดู
+    public String getchange() {
+        return this.change;
+    }
+}
