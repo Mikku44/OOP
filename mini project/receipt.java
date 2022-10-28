@@ -28,8 +28,8 @@ public class Receipt {
     }
 
     // Method สำหรับ ผลรวม
-    public void settotal(int price) {
-        this.total = price * this.amountMenu;
+    public void settotal(int price,int amount) {
+        this.total = total + price * amount;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

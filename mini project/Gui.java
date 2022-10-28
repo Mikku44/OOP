@@ -10,6 +10,21 @@ public class Gui {
     protected static Receipt r = new Receipt();
     protected static JTextField amountTF = new JTextField(10);
     protected static int total = 0;
+    protected static JButton Nbtn1 = new JButton("Yellow Noodles");
+    protected static JButton Nbtn2 = new JButton("Rice Vermicelli");
+    protected static JButton Nbtn3 = new JButton("Instant Noodles");
+    protected static JButton Sbtn1 = new JButton("Tomyam soup");
+    protected static JButton Sbtn2 = new JButton("Paloo soup");
+    protected static JButton Cbtn1 = new JButton("Yes");
+    protected static JButton Cbtn2 = new JButton("No");
+    protected static JButton Mbtn1 = new JButton("Chicken");
+    protected static JButton Mbtn2 = new JButton("Meat");
+    protected static JButton Mbtn3 = new JButton("Fish meatball");
+    protected static JButton Mbtn4 = new JButton("None");
+    protected static JButton Pbtn = new JButton("25");
+    protected static JButton Pbtn1 = new JButton("30");
+    protected static JButton oBtn = new JButton("Continue");
+    protected static JButton ClearBtn = new JButton("New Menu");
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Noodle NOOB");
@@ -32,9 +47,7 @@ public class Gui {
         JLabel Pdescription = new JLabel("Price :");
 
         // ?Noodles
-        JButton Nbtn1 = new JButton("Yellow Noodles");
-        JButton Nbtn2 = new JButton("Rice Vermicelli");
-        JButton Nbtn3 = new JButton("Instant Noodles");
+
         Nbtn1.setBackground(primaryColor);
         Nbtn2.setBackground(primaryColor);
         Nbtn3.setBackground(primaryColor);
@@ -43,26 +56,21 @@ public class Gui {
         Nbtn3.addActionListener(NoodlesBtn);
 
         // ?cathchup
-        JButton Cbtn1 = new JButton("Yes");
-        JButton Cbtn2 = new JButton("No");
+
         Cbtn1.setBackground(primaryColor);
         Cbtn2.setBackground(primaryColor);
         Cbtn1.addActionListener(CathchupBtn);
         Cbtn2.addActionListener(CathchupBtn);
 
         // ?Soup
-        JButton Sbtn1 = new JButton("Tomyam soup");
-        JButton Sbtn2 = new JButton("Paloo soup");
+
         Sbtn1.setBackground(primaryColor);
         Sbtn2.setBackground(primaryColor);
         Sbtn1.addActionListener(SoupBtn);
         Sbtn2.addActionListener(SoupBtn);
 
         // ?Meat
-        JButton Mbtn1 = new JButton("Chicken");
-        JButton Mbtn2 = new JButton("Meat");
-        JButton Mbtn3 = new JButton("Fish meatball");
-        JButton Mbtn4 = new JButton("None");
+
         Mbtn1.setBackground(primaryColor);
         Mbtn2.setBackground(primaryColor);
         Mbtn3.setBackground(primaryColor);
@@ -73,17 +81,19 @@ public class Gui {
         Mbtn4.addActionListener(TypeBtn);
 
         // ? Price
-        JButton Pbtn = new JButton("25");
-        JButton Pbtn1 = new JButton("30");
+
         Pbtn.setBackground(primaryColor);
         Pbtn1.setBackground(primaryColor);
         Pbtn.addActionListener(Pricebtn);
         Pbtn1.addActionListener(Pricebtn);
 
         // ?Option
-        JButton oBtn = new JButton("Continue");
+
         oBtn.setBackground(primaryColor);
         oBtn.addActionListener(orderMenu);
+
+        ClearBtn.setBackground(primaryColor);
+        ClearBtn.addActionListener(clearAll);
 
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         // frame.setLayout(new GridLayout(0,1));
@@ -140,6 +150,7 @@ public class Gui {
 
         panelButtom.setBackground(Color.white);
         panelButtom.add(oBtn);
+        panelButtom.add(ClearBtn);
 
         frame.setSize(800, 600);
         frame.add(panel, BorderLayout.NORTH);
@@ -219,6 +230,27 @@ public class Gui {
         }
     };
 
+    static ActionListener clearAll = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            Nbtn1.setBackground(primaryColor);
+            Nbtn2.setBackground(primaryColor);
+            Nbtn3.setBackground(primaryColor);
+            Sbtn1.setBackground(primaryColor);
+            Sbtn2.setBackground(primaryColor);
+            Cbtn1.setBackground(primaryColor);
+            Cbtn2.setBackground(primaryColor);
+            Mbtn1.setBackground(primaryColor);
+            Mbtn2.setBackground(primaryColor);
+            Mbtn3.setBackground(primaryColor);
+            Mbtn4.setBackground(primaryColor);
+            Pbtn.setBackground(primaryColor);
+            Pbtn1.setBackground(primaryColor);
+            oBtn.setBackground(primaryColor);
+            
+
+        }
+    };
+
     static ActionListener orderMenu = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try { // JButton Source =(JButton) e.getSource();
@@ -235,11 +267,11 @@ public class Gui {
                         Integer.toString(n.getPrice())
                 });
                 r.setamountMenu(n.getAmount());
-                r.settotal(n.getPrice());
+                r.settotal(n.getPrice(), n.getAmount());
 
                 System.out.println(r.getdateOrder());
                 System.out.println(r.getuserName());
-                System.out.println(r.getorderMenu());
+                System.out.println(r.getorderMenu()[0]);
                 System.out.println(r.getamountMenu());
                 System.out.println(r.gettotal());
                 // JLabel order = new JLabel(n.getNoodles());
@@ -267,10 +299,12 @@ public class Gui {
                     // bill.append("\nCathchup : " + Boolean.toString(n.getCathchup()) + "\n");
                     // bill.append("\nAmount : " + n.getAmount() + "\n");
                     // bill.append("\nPrice : " + Integer.toString(n.getPrice()) + "฿\n\n");
-                    String[] x = r.getdateOrder();
-                    for (int j = 0; j < 2; j += 1) {
-                        bill.append(r.getorderMenu());
+                    String[] x = r.getorderMenu();
+                    for (int j = 0; j < x.length; j += 1) {
+                        bill.append("\n" + r.getorderMenu()[j]);
+
                     }
+                    bill.append("\n");
                     i++;
                 }
                 bill.append("    ---------------------------------------------------------------------------\n");
