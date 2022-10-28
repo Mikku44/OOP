@@ -8,7 +8,8 @@ public class Gui {
     protected static Color secondaryColor = new Color(255, 200, 100);
     protected static Noodle n = new Noodle();
     protected static Receipt r = new Receipt();
-    static JTextField amountTF = new JTextField(10);
+    protected static JTextField amountTF = new JTextField(10);
+    protected static int total = 0;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Noodle NOOB");
@@ -254,21 +255,26 @@ public class Gui {
 
                 receipt.add(scroll);
                 // header
-                bill.setText("\t        Receipt for "+r.getuserName()+"\n");
-                bill.append("         Receipt create at "+r.getdateOrder()+"\n");
+                bill.setText("\t        Receipt for " + r.getuserName() + "\n");
+                bill.append("         Receipt create at " + r.getdateOrder() + "\n");
                 bill.append("    ---------------------------------------------------------------------------");
                 int i = 0;
-                while (i < r.getamountMenu()) {
-                    bill.append("\nNoodles : " + n.getNoodles() + "\n");
-                    bill.append("\nSoup : " + n.getSoup() + "\n");
-                    bill.append("\nTypeOfMeat : " + n.getTypeOfMeat() + "\n");
-                    bill.append("\nCathchup : " + Boolean.toString(n.getCathchup()) + "\n");
-                    bill.append("\nAmount : " + n.getAmount() + "\n");
-                    bill.append("\nPrice : " + Integer.toString(n.getPrice()) + "฿\n\n");
+                total += 1;
+                while (i < total) {
+                    // bill.append("\nNoodles : " + n.getNoodles() + "\n");
+                    // bill.append("\nSoup : " + n.getSoup() + "\n");
+                    // bill.append("\nTypeOfMeat : " + n.getTypeOfMeat() + "\n");
+                    // bill.append("\nCathchup : " + Boolean.toString(n.getCathchup()) + "\n");
+                    // bill.append("\nAmount : " + n.getAmount() + "\n");
+                    // bill.append("\nPrice : " + Integer.toString(n.getPrice()) + "฿\n\n");
+                    String[] x = r.getdateOrder();
+                    for (int j = 0; j < 2; j += 1) {
+                        bill.append(r.getorderMenu());
+                    }
                     i++;
                 }
                 bill.append("    ---------------------------------------------------------------------------\n");
-                bill.append("Total number : "+r.getamountMenu() + "\t\tTotal price : " + r.gettotal() + "\n");
+                bill.append("Total number : " + r.getamountMenu() + "\t\tTotal price : " + r.gettotal() + "\n");
                 receipt.setVisible(true);
             } catch (Exception er) {
                 JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");
