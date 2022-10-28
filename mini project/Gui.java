@@ -10,6 +10,7 @@ public class Gui {
     protected static Noodle n = new Noodle();
     protected static Receipt r = new Receipt();
     protected static JTextField amountTF = new JTextField(10);
+    protected static JTextField userTf = new JTextField(20);
     protected static JButton Nbtn1 = new JButton("Yellow Noodles");
     protected static JButton Nbtn2 = new JButton("Rice Vermicelli");
     protected static JButton Nbtn3 = new JButton("Instant Noodles");
@@ -47,6 +48,8 @@ public class Gui {
         JLabel Mdescription = new JLabel("Meat :");
         JLabel Adescription = new JLabel("Amount :");
         JLabel Pdescription = new JLabel("Price :");
+        JLabel user = new JLabel("Customer Name :");
+
 
         // ?Noodles
 
@@ -140,7 +143,9 @@ public class Gui {
         panelCenter4.add(Pbtn1);
 
         emptyPanel.setBackground(Color.white);
-
+        emptyPanel.add(user);
+        emptyPanel.add(userTf);
+        
         panelLeft.setLayout(new GridLayout(0, 1));
         panelLeft.add(panelCenter);
         panelLeft.add(panelCenter3);
@@ -165,7 +170,7 @@ public class Gui {
 
     }
 
-
+    //? Button Event
     static ActionListener NoodlesBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
@@ -228,7 +233,7 @@ public class Gui {
 
     static ActionListener clearAll = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            if((((JButton)e.getSource()).getText()).equals("New Order"))
+        
             JOptionPane.showMessageDialog(null,"Create order success!!");
             Nbtn1.setBackground(primaryColor);
             Nbtn2.setBackground(primaryColor);
@@ -264,7 +269,7 @@ public class Gui {
 
                 // ? Set info to Receipt
                 r.setdateOrder();
-                r.setuserName("test user");
+                r.setuserName(userTf.getText());
                 r.setorderMenu(new String[] { n.getNoodles(),
                         n.getSoup(),
                         n.getTypeOfMeat(),
@@ -284,9 +289,8 @@ public class Gui {
                 JTextArea bill = new JTextArea();
                 JScrollPane scroll = new JScrollPane(bill);
                 receipt.setTitle("Noodle Noob Order");
-                receipt.setSize(350, 500);
+                receipt.setSize(800, 500);
 
-                receipt.add(scroll);
                 // header
                 bill.setText("\t        Receipt for " + r.getuserName() + "\n");
                 bill.append("         Receipt create at " + r.getdateOrder() + "\n");
@@ -301,12 +305,16 @@ public class Gui {
                     }
                     bill.append("\n" + (r.getorderMenu()).get(j));
                 }
+                
                 bill.append(" \n");
-
                 bill.append("    ---------------------------------------------------------------------------\n");
                 bill.append("Total number : " + r.getamountMenu() + "\t          Total price : " + r.gettotal() + "\n");
-                receipt.setVisible(true);
+
+
                 
+                receipt.add(scroll, BorderLayout.WEST);
+                receipt.add((new JPanel()).add(new JLabel("Payment page")),BorderLayout.CENTER);
+                receipt.setVisible(true);
             } catch (Exception er) {
                 JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");
             }

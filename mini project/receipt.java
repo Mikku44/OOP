@@ -4,7 +4,7 @@ import java.util.Date;
 public class Receipt {
     // กำหนดคุณสมบัติ
     private Date dateOrder;
-    private String userName;
+    private String userName ="Anonymous";
     private ArrayList<String> orderMenu = new ArrayList<String>();
     private int amountMenu = 0;
     private int total = 0;

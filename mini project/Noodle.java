@@ -49,17 +49,5 @@ public class Noodle {
         return this.price;
     }
 
-    public String[] getNoodle() {
-        
-        System.out.println(this.noodles);
-        System.out.println(this.soup);
-        System.out.println(this.typeOfMeat);
-        System.out.println(this.cathchup);
-        System.out.println(this.amount);
-        System.out.println(this.price);
-
-        String[] menu = {this.noodles,Boolean.toString(this.cathchup),this.soup,this.typeOfMeat,Integer.toString(this.amount),Integer.toString(this.price)};
-        return menu;
-    }
 
 }
