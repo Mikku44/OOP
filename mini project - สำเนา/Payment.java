@@ -15,8 +15,8 @@ public class Payment {
     }
 
     // Method สำหรับ
-    public void setchange(int total) {
-        this.change = this.pay - total;;
+    public void setchange(int change) {
+        this.change = change;
     }
     ////////////////////////////////////////////////////////////////////////
 

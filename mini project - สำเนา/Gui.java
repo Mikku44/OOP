@@ -9,7 +9,6 @@ public class Gui {
     protected static Color secondaryColor = new Color(255, 200, 100);
     protected static Noodle n = new Noodle();
     protected static Receipt r = new Receipt();
-    protected static Payment p = new Payment();
     protected static JTextField amountTF = new JTextField(10);
     protected static JTextField userTf = new JTextField(20);
     protected static JButton Nbtn1 = new JButton("Yellow Noodles");
@@ -31,7 +30,7 @@ public class Gui {
     protected static JFrame frame = new JFrame("Noodle NOOB");
 
     public static void main(String[] args) {
-
+        
         JPanel panel = new JPanel();
         JPanel panelCenter = new JPanel();
         JPanel panelCenter1 = new JPanel();
@@ -50,6 +49,7 @@ public class Gui {
         JLabel Adescription = new JLabel("Amount :");
         JLabel Pdescription = new JLabel("Price :");
         JLabel user = new JLabel("Customer Name :");
+
 
         // ?Noodles
 
@@ -145,7 +145,7 @@ public class Gui {
         emptyPanel.setBackground(Color.white);
         emptyPanel.add(user);
         emptyPanel.add(userTf);
-
+        
         panelLeft.setLayout(new GridLayout(0, 1));
         panelLeft.add(panelCenter);
         panelLeft.add(panelCenter3);
@@ -170,7 +170,7 @@ public class Gui {
 
     }
 
-    // ? Button Event
+    //? Button Event
     static ActionListener NoodlesBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
@@ -233,8 +233,8 @@ public class Gui {
 
     static ActionListener clearAll = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-
-            JOptionPane.showMessageDialog(null, "Create order success!!");
+        
+            JOptionPane.showMessageDialog(null,"Create order success!!");
             Nbtn1.setBackground(primaryColor);
             Nbtn2.setBackground(primaryColor);
             Nbtn3.setBackground(primaryColor);
@@ -250,6 +250,7 @@ public class Gui {
             Pbtn1.setBackground(primaryColor);
             oBtn.setBackground(primaryColor);
 
+
         }
     };
 
@@ -263,18 +264,7 @@ public class Gui {
     static ActionListener orderMenu = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try { // JButton Source =(JButton) e.getSource();
-                receipt = new JFrame();
-                JTextArea bill = new JTextArea();
-                JScrollPane scroll = new JScrollPane(bill);
-                JPanel paymentPanel = new JPanel();
-                JLabel label = new JLabel("Payment page");
-                JLabel label1 = new JLabel("Pay :");
-                JLabel label2 = new JLabel("Change : ");
-                JTextField Pay = new JTextField();
-                JTextField Change = new JTextField();
-                JButton pp = new JButton(new ImageIcon("pp.png"));
-                JButton cash = new JButton(new ImageIcon("cash.png"));
-                JButton pay = new JButton("Pay");
+                
                 n.setAmount(Integer.parseInt(amountTF.getText()));
 
                 // ? Set info to Receipt
@@ -290,6 +280,14 @@ public class Gui {
                 r.setamountMenu(n.getAmount());
                 r.settotal(n.getPrice(), n.getAmount());
 
+                System.out.println(r.getdateOrder());
+                System.out.println(r.getuserName());
+                System.out.println(r.getorderMenu());
+                System.out.println(r.getamountMenu());
+                System.out.println(r.gettotal());
+                receipt = new JFrame();
+                JTextArea bill = new JTextArea();
+                JScrollPane scroll = new JScrollPane(bill);
                 receipt.setTitle("Noodle Noob Order");
                 receipt.setSize(800, 500);
 
@@ -299,85 +297,27 @@ public class Gui {
                 bill.append("    ---------------------------------------------------------------------------");
 
                 ArrayList<String> x = r.getorderMenu();
-
-                for (int j = 0, total = 0; j < x.size(); j += 1) {
+                
+                for (int j=0,total=0; j < x.size(); j += 1) {
                     if (j % 6 == 0) {
                         total += 1;
                         bill.append("\n\n**Order " + (total) + "**\n");
                     }
                     bill.append("\n" + (r.getorderMenu()).get(j));
                 }
-
+                
                 bill.append(" \n");
                 bill.append("    ---------------------------------------------------------------------------\n");
                 bill.append("Total number : " + r.getamountMenu() + "\t          Total price : " + r.gettotal() + "\n");
 
-                label.setFont(new Font("Arial", Font.BOLD, 24));
 
-                pp.setBackground(Color.decode("#EEEEEE"));
-                pp.setBorder(null);
-                pp.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        JButton Source = (JButton) e.getSource();
-                        Source.setBackground(secondaryColor);
-                        cash.setBackground(Color.decode("#EEEEEE"));
-                        p.setPayment("Promptpay");
-                        label1.setBounds(-999, 300, 200, 24);
-                        label2.setBounds(-999, 350, 200, 24);
-                        Pay.setBounds(-999, 300, 200, 24);
-                        Change.setBounds(-999, 350, 200, 24);
-                    }
-                });
-
-                cash.setBackground(Color.decode("#EEEEEE"));
-                cash.setBorder(null);
-                cash.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        JButton Source = (JButton) e.getSource();
-                        Source.setBackground(secondaryColor);
-                        pp.setBackground(Color.decode("#EEEEEE"));
-                        p.setPayment("Cash");
-                        label1.setBounds(180, 300, 200, 24);
-                        label2.setBounds(180, 350, 200, 24);
-                        Pay.setBounds(250, 300, 200, 24);
-                        Change.setBounds(250, 350, 200, 24);
-                    }
-                });
-
-                pay.setBackground(Color.decode("#EEEEEE"));
-                pay.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        p.setPay(Integer.parseInt(Pay.getText()));
-                        p.setchange(r.gettotal());
-                        Change.setText(p.getchange()+" ฿");
-
-                    }
-                });
-
-                label.setBounds(200, 20, 200, 50);
-                pp.setBounds(50, 50, 200, 200);
-                cash.setBounds(250, 50, 200, 200);
-                pay.setBounds(150, 400, 200, 24);
-
-
-                paymentPanel.setLayout(null);
-                paymentPanel.add(label);
-                paymentPanel.add(pp);
-                paymentPanel.add(pay);
-                paymentPanel.add(cash);
-                paymentPanel.add(label1);
-                paymentPanel.add(label2);
-                paymentPanel.add(Change);
-                paymentPanel.add(Pay);
-
+                
                 receipt.add(scroll, BorderLayout.WEST);
-                receipt.add(paymentPanel, BorderLayout.CENTER);
+                receipt.add((new JPanel()).add(new JLabel("Payment page")),BorderLayout.CENTER);
                 receipt.setVisible(true);
-
             } catch (Exception er) {
                 JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");
             }
-
         }
     };
 
