@@ -8,6 +8,7 @@ public class Gui {
     protected static Color primaryColor = new Color(255,240,240);
     protected static Color secondaryColor = new Color(255,  200 , 100);
     protected static Noodle n = new Noodle();
+    static JTextField amountTF = new JTextField(10);
     public static void main(String[] args){
         JFrame frame  = new JFrame("Noodle NOOB");
         JPanel panel = new JPanel();
@@ -28,8 +29,8 @@ public class Gui {
         JLabel Adescription = new JLabel("Amount :");
         JLabel Pdescription = new JLabel("Price :");
 
-        JTextField amountTF = new JTextField(10);
-
+        
+        
         
 
         //?Noodles
@@ -48,8 +49,8 @@ public class Gui {
         JButton Cbtn2 = new JButton("No");
         Cbtn1.setBackground(primaryColor);
         Cbtn2.setBackground(primaryColor);
-        Cbtn1.addActionListener(x);
-        Cbtn2.addActionListener(x);
+        Cbtn1.addActionListener(CathchupBtn);
+        Cbtn2.addActionListener(CathchupBtn);
        
         
         //?Soup
@@ -57,8 +58,8 @@ public class Gui {
         JButton Sbtn2 = new JButton("Paloo soup");
         Sbtn1.setBackground(primaryColor);
         Sbtn2.setBackground(primaryColor);
-        Sbtn1.addActionListener(x);
-        Sbtn2.addActionListener(x);
+        Sbtn1.addActionListener(SoupBtn);
+        Sbtn2.addActionListener(SoupBtn);
 
         
         //?Meat
@@ -70,18 +71,18 @@ public class Gui {
         Mbtn2.setBackground(primaryColor);
         Mbtn3.setBackground(primaryColor);
         Mbtn4.setBackground(primaryColor);
-        Mbtn1.addActionListener(x);
-        Mbtn2.addActionListener(x);
-        Mbtn3.addActionListener(x);
-        Mbtn4.addActionListener(x);
+        Mbtn1.addActionListener(TypeBtn);
+        Mbtn2.addActionListener(TypeBtn);
+        Mbtn3.addActionListener(TypeBtn);
+        Mbtn4.addActionListener(TypeBtn);
         
         //? Price
-        JButton Pbtn = new JButton("25 ฿");
-        JButton Pbtn1 = new JButton("30 ฿");
+        JButton Pbtn = new JButton("25");
+        JButton Pbtn1 = new JButton("30");
         Pbtn.setBackground(primaryColor);
         Pbtn1.setBackground(primaryColor);
-        Pbtn.addActionListener(x);
-        Pbtn.addActionListener(x);
+        Pbtn.addActionListener(Pricebtn);
+        Pbtn1.addActionListener(Pricebtn);
 
         //?Option
         JButton oBtn = new JButton("Continue");
@@ -155,7 +156,7 @@ public class Gui {
         frame.add(panelRight,BorderLayout.CENTER);
         frame.add(panelLeft,BorderLayout.WEST);
         frame.add(panelButtom,BorderLayout.SOUTH);
-
+        
         frame.setVisible(true);
 
     }
@@ -207,23 +208,44 @@ public class Gui {
     
         Source.setBackground(secondaryColor);
     }};
+    
+    static ActionListener Pricebtn = new ActionListener(){
+    public  void  actionPerformed(ActionEvent e){
+        JButton Source  =(JButton) e.getSource();
+        // JOptionPane.showMessageDialog(null,Source.getText());
+        n.setPrice(Integer.parseInt(Source.getText()));
+        Source.setBackground(secondaryColor);
 
+    }};
+
+    
+    
     static ActionListener orderMenu = new ActionListener(){
     public  void  actionPerformed(ActionEvent e){
         JButton Source  =(JButton) e.getSource();
-        JLabel order = new JLabel(n.getNoodles());
-        JLabel order1 = new JLabel(Boolean.toString(n.getCathchup()));
-        JLabel order2 = new JLabel(n.getTypeOfMeat());
-        JLabel order3 = new JLabel(Integer.toString(n.getPrice()));
-        JLabel order4 = new JLabel(n.getSoup());
+        n.setAmount(Integer.parseInt(amountTF.getText()));
+        // JLabel order = new JLabel(n.getNoodles());
+        // JLabel order1 = new JLabel(Boolean.toString(n.getCathchup()));
+        // JLabel order2 = new JLabel(n.getTypeOfMeat());
+        // JLabel order3 = new JLabel(Integer.toString(n.getPrice()));
+        // JLabel order4 = new JLabel(n.getSoup());
+        JPanel p = new JPanel();
         JFrame receipt = new JFrame();
+        JTextArea bill = new JTextArea();
         receipt.setTitle("Order");
         receipt.setSize(350,500);
-        receipt.add(order);
-        receipt.add(order1);
-        receipt.add(order2);
-        receipt.add(order3);
-        receipt.add(order4);
+        receipt.add(p);
+
+        receipt.add(bill);
+        bill.setText("\tReceipt for {username}\n");
+        bill.append("    ---------------------------------------------------------------------------");
+
+        bill.append("\nNoodles : "+n.getNoodles()+"\n");
+        bill.append("\nSoup : "+ n.getSoup()+"\n");
+        bill.append("\nTypeOfMeat : "+ n.getTypeOfMeat()+"\n");
+        bill.append("\nCathchup : "+ Boolean.toString(n.getCathchup())+"\n");
+        bill.append("\nAmount : "+ n.getAmount()+"\n");
+        bill.append("\nPrice : "+ Integer.toString(n.getPrice())+"฿\n");
         receipt.setVisible(true);
     }};
 
