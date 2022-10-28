@@ -354,7 +354,7 @@ public class Gui {
                     }
                 });
 
-                label.setBounds(200, 20, 200, 50);
+                label.setBounds(150, 10, 200, 50);
                 pp.setBounds(50, 50, 200, 200);
                 cash.setBounds(250, 50, 200, 200);
                 pay.setBounds(150, 400, 200, 24);
