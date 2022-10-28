@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Gui {
     protected static Color primaryColor = new Color(255, 240, 240);
@@ -9,7 +10,6 @@ public class Gui {
     protected static Noodle n = new Noodle();
     protected static Receipt r = new Receipt();
     protected static JTextField amountTF = new JTextField(10);
-    protected static int total = 0;
     protected static JButton Nbtn1 = new JButton("Yellow Noodles");
     protected static JButton Nbtn2 = new JButton("Rice Vermicelli");
     protected static JButton Nbtn3 = new JButton("Instant Noodles");
@@ -24,7 +24,7 @@ public class Gui {
     protected static JButton Pbtn = new JButton("25");
     protected static JButton Pbtn1 = new JButton("30");
     protected static JButton oBtn = new JButton("Continue");
-    protected static JButton ClearBtn = new JButton("New Menu");
+    protected static JButton userBtn = new JButton("New Order");
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Noodle NOOB");
@@ -92,8 +92,9 @@ public class Gui {
         oBtn.setBackground(primaryColor);
         oBtn.addActionListener(orderMenu);
 
-        ClearBtn.setBackground(primaryColor);
-        ClearBtn.addActionListener(clearAll);
+        userBtn.setBackground(primaryColor);
+        userBtn.addActionListener(clearAll);
+        userBtn.addActionListener(clearAllValue);
 
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         // frame.setLayout(new GridLayout(0,1));
@@ -150,7 +151,7 @@ public class Gui {
 
         panelButtom.setBackground(Color.white);
         panelButtom.add(oBtn);
-        panelButtom.add(ClearBtn);
+        panelButtom.add(userBtn);
 
         frame.setSize(800, 600);
         frame.add(panel, BorderLayout.NORTH);
@@ -167,14 +168,6 @@ public class Gui {
 
     }
 
-    static ActionListener x = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            JButton Source = (JButton) e.getSource();
-            // JOptionPane.showMessageDialog(null,Source.getText());
-
-            Source.setBackground(secondaryColor);
-        }
-    };
 
     static ActionListener NoodlesBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -182,6 +175,9 @@ public class Gui {
             // JOptionPane.showMessageDialog(null,Source.getText());
 
             n.setNoodle(Source.getText());
+            Nbtn1.setBackground(primaryColor);
+            Nbtn2.setBackground(primaryColor);
+            Nbtn3.setBackground(primaryColor);
             Source.setBackground(secondaryColor);
         }
     };
@@ -192,6 +188,8 @@ public class Gui {
             // JOptionPane.showMessageDialog(null,Source.getText());
 
             n.setSoup(Source.getText());
+            Sbtn1.setBackground(primaryColor);
+            Sbtn2.setBackground(primaryColor);
             Source.setBackground(secondaryColor);
         }
     };
@@ -200,7 +198,10 @@ public class Gui {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
             // JOptionPane.showMessageDialog(null,Source.getText());
-
+            Mbtn1.setBackground(primaryColor);
+            Mbtn2.setBackground(primaryColor);
+            Mbtn3.setBackground(primaryColor);
+            Mbtn4.setBackground(primaryColor);
             n.setTypeOfMeat(Source.getText());
             Source.setBackground(secondaryColor);
         }
@@ -215,7 +216,8 @@ public class Gui {
             } else {
                 n.setCathchup(false);
             }
-
+            Cbtn1.setBackground(primaryColor);
+            Cbtn2.setBackground(primaryColor);
             Source.setBackground(secondaryColor);
         }
     };
@@ -225,6 +227,8 @@ public class Gui {
             JButton Source = (JButton) e.getSource();
             // JOptionPane.showMessageDialog(null,Source.getText());
             n.setPrice(Integer.parseInt(Source.getText()));
+            Pbtn.setBackground(primaryColor);
+            Pbtn1.setBackground(primaryColor);
             Source.setBackground(secondaryColor);
 
         }
@@ -246,14 +250,20 @@ public class Gui {
             Pbtn.setBackground(primaryColor);
             Pbtn1.setBackground(primaryColor);
             oBtn.setBackground(primaryColor);
-            
 
+        }
+    };
+
+    static ActionListener clearAllValue = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            r.clearOrder();
         }
     };
 
     static ActionListener orderMenu = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try { // JButton Source =(JButton) e.getSource();
+                
                 n.setAmount(Integer.parseInt(amountTF.getText()));
 
                 // ? Set info to Receipt
@@ -271,7 +281,7 @@ public class Gui {
 
                 System.out.println(r.getdateOrder());
                 System.out.println(r.getuserName());
-                System.out.println(r.getorderMenu()[0]);
+                System.out.println(r.getorderMenu());
                 System.out.println(r.getamountMenu());
                 System.out.println(r.gettotal());
                 // JLabel order = new JLabel(n.getNoodles());
@@ -290,25 +300,20 @@ public class Gui {
                 bill.setText("\t        Receipt for " + r.getuserName() + "\n");
                 bill.append("         Receipt create at " + r.getdateOrder() + "\n");
                 bill.append("    ---------------------------------------------------------------------------");
-                int i = 0;
-                total += 1;
-                while (i < total) {
-                    // bill.append("\nNoodles : " + n.getNoodles() + "\n");
-                    // bill.append("\nSoup : " + n.getSoup() + "\n");
-                    // bill.append("\nTypeOfMeat : " + n.getTypeOfMeat() + "\n");
-                    // bill.append("\nCathchup : " + Boolean.toString(n.getCathchup()) + "\n");
-                    // bill.append("\nAmount : " + n.getAmount() + "\n");
-                    // bill.append("\nPrice : " + Integer.toString(n.getPrice()) + "฿\n\n");
-                    String[] x = r.getorderMenu();
-                    for (int j = 0; j < x.length; j += 1) {
-                        bill.append("\n" + r.getorderMenu()[j]);
 
+                ArrayList<String> x = r.getorderMenu();
+                
+                for (int j=0,total=0; j < x.size(); j += 1) {
+                    if (j % 6 == 0) {
+                        total += 1;
+                        bill.append("\n\n**Order " + (total) + "**\n");
                     }
-                    bill.append("\n");
-                    i++;
+                    bill.append("\n" + (r.getorderMenu()).get(j));
                 }
+                bill.append(" \n");
+
                 bill.append("    ---------------------------------------------------------------------------\n");
-                bill.append("Total number : " + r.getamountMenu() + "\t\tTotal price : " + r.gettotal() + "\n");
+                bill.append("Total number : " + r.getamountMenu() + "\t          Total price : " + r.gettotal() + "\n");
                 receipt.setVisible(true);
             } catch (Exception er) {
                 JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");

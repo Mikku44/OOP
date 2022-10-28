@@ -1,15 +1,17 @@
+import java.util.ArrayList;
 import java.util.Date;
+
 public class Receipt {
     // กำหนดคุณสมบัติ
     private Date dateOrder;
     private String userName;
-    private String[] orderMenu;
+    private ArrayList<String> orderMenu = new ArrayList<String>();
     private int amountMenu = 0;
     private int total = 0;
 
     // Method สำหรับ วันที่สั่งซื้อ
     public void setdateOrder() {
-        this.dateOrder = new Date() ;
+        this.dateOrder = new Date();
     }
 
     // Method สำหรับ ชื่อผู้สั่ง
@@ -19,17 +21,24 @@ public class Receipt {
 
     // Method สำหรับ รายการที่สั่ง
     public void setorderMenu(String[] orderMenu) {
-        this.orderMenu = orderMenu;
+        for (int i = 0; i < orderMenu.length; i += 1) {
+            this.orderMenu.add(orderMenu[i]);
+        }
     }
 
     // Method สำหรับ จำนวนเมนูทั้งหมด
     public void setamountMenu(int amountMenu) {
-        this.amountMenu = this.amountMenu+amountMenu;
+        this.amountMenu = this.amountMenu + amountMenu;
     }
 
     // Method สำหรับ ผลรวม
-    public void settotal(int price,int amount) {
+    public void settotal(int price, int amount) {
         this.total = total + price * amount;
+    }
+
+    // Method สำหรับ ลบเมฯู
+    public void clearOrder() {
+        this.orderMenu.clear();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +54,7 @@ public class Receipt {
     }
 
     // Method สำหรับไว้ให้เรียกดู รายการที่สั่ง
-    public String[] getorderMenu() {
+    public ArrayList<String> getorderMenu() {
         return this.orderMenu;
     }
 
