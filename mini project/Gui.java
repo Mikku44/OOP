@@ -25,9 +25,11 @@ public class Gui {
     protected static JButton Pbtn1 = new JButton("30");
     protected static JButton oBtn = new JButton("Continue");
     protected static JButton userBtn = new JButton("New Order");
+    protected static JFrame receipt = new JFrame();
+    protected static JFrame frame = new JFrame("Noodle NOOB");
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Noodle NOOB");
+        
         JPanel panel = new JPanel();
         JPanel panelCenter = new JPanel();
         JPanel panelCenter1 = new JPanel();
@@ -155,11 +157,6 @@ public class Gui {
 
         frame.setSize(800, 600);
         frame.add(panel, BorderLayout.NORTH);
-        // frame.add(panelCenter,BorderLayout.EAST);
-        // frame.add(panelCenter1,BorderLayout.WEST);
-        // frame.add(panelCenter2,BorderLayout.EAST);
-        // frame.add(panelCenter3,BorderLayout.WEST);
-        // frame.add(panelCenter4,BorderLayout.EAST);
         frame.add(panelRight, BorderLayout.CENTER);
         frame.add(panelLeft, BorderLayout.WEST);
         frame.add(panelButtom, BorderLayout.SOUTH);
@@ -172,8 +169,6 @@ public class Gui {
     static ActionListener NoodlesBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
-            // JOptionPane.showMessageDialog(null,Source.getText());
-
             n.setNoodle(Source.getText());
             Nbtn1.setBackground(primaryColor);
             Nbtn2.setBackground(primaryColor);
@@ -185,8 +180,6 @@ public class Gui {
     static ActionListener SoupBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
-            // JOptionPane.showMessageDialog(null,Source.getText());
-
             n.setSoup(Source.getText());
             Sbtn1.setBackground(primaryColor);
             Sbtn2.setBackground(primaryColor);
@@ -197,7 +190,6 @@ public class Gui {
     static ActionListener TypeBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
-            // JOptionPane.showMessageDialog(null,Source.getText());
             Mbtn1.setBackground(primaryColor);
             Mbtn2.setBackground(primaryColor);
             Mbtn3.setBackground(primaryColor);
@@ -236,6 +228,8 @@ public class Gui {
 
     static ActionListener clearAll = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+            if((((JButton)e.getSource()).getText()).equals("New Order"))
+            JOptionPane.showMessageDialog(null,"Create order success!!");
             Nbtn1.setBackground(primaryColor);
             Nbtn2.setBackground(primaryColor);
             Nbtn3.setBackground(primaryColor);
@@ -251,12 +245,14 @@ public class Gui {
             Pbtn1.setBackground(primaryColor);
             oBtn.setBackground(primaryColor);
 
+
         }
     };
 
     static ActionListener clearAllValue = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             r.clearOrder();
+            receipt.dispose();
         }
     };
 
@@ -284,12 +280,7 @@ public class Gui {
                 System.out.println(r.getorderMenu());
                 System.out.println(r.getamountMenu());
                 System.out.println(r.gettotal());
-                // JLabel order = new JLabel(n.getNoodles());
-                // JLabel order1 = new JLabel(Boolean.toString(n.getCathchup()));
-                // JLabel order2 = new JLabel(n.getTypeOfMeat());
-                // JLabel order3 = new JLabel(Integer.toString(n.getPrice()));
-                // JLabel order4 = new JLabel(n.getSoup());
-                JFrame receipt = new JFrame();
+                receipt = new JFrame();
                 JTextArea bill = new JTextArea();
                 JScrollPane scroll = new JScrollPane(bill);
                 receipt.setTitle("Noodle Noob Order");
@@ -315,6 +306,7 @@ public class Gui {
                 bill.append("    ---------------------------------------------------------------------------\n");
                 bill.append("Total number : " + r.getamountMenu() + "\t          Total price : " + r.gettotal() + "\n");
                 receipt.setVisible(true);
+                
             } catch (Exception er) {
                 JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");
             }
