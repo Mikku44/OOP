@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+
 
 public class Gui {
     protected static Color primaryColor = new Color(255,240,240);
     protected static Color secondaryColor = new Color(255,  200 , 100);
     protected static Noodle n = new Noodle();
+    protected static Receipt r = new Receipt();
     static JTextField amountTF = new JTextField(10);
     public static void main(String[] args){
         JFrame frame  = new JFrame("Noodle NOOB");
@@ -222,31 +223,53 @@ public class Gui {
     
     static ActionListener orderMenu = new ActionListener(){
     public  void  actionPerformed(ActionEvent e){
-        JButton Source  =(JButton) e.getSource();
+      try{  // JButton Source  =(JButton) e.getSource();
         n.setAmount(Integer.parseInt(amountTF.getText()));
+
+        //? Set info to Receipt
+        r.setdateOrder();
+        r.setuserName("test user");
+        r.setorderMenu(new String[]{n.getNoodles(),
+            n.getSoup(),
+            n.getTypeOfMeat(),
+            Boolean.toString(n.getCathchup()),
+            Integer.toString(n.getAmount()),
+            Integer.toString(n.getPrice())
+        });
+        r.setamountMenu(n.getAmount());
+        r.settotal(n.getPrice());
+
+        System.out.println(r.getdateOrder());
+        System.out.println(r.getuserName());
+        System.out.println(r.getorderMenu());
+        System.out.println(r.getamountMenu());
+        System.out.println(r.gettotal());
         // JLabel order = new JLabel(n.getNoodles());
         // JLabel order1 = new JLabel(Boolean.toString(n.getCathchup()));
         // JLabel order2 = new JLabel(n.getTypeOfMeat());
         // JLabel order3 = new JLabel(Integer.toString(n.getPrice()));
         // JLabel order4 = new JLabel(n.getSoup());
-        JPanel p = new JPanel();
         JFrame receipt = new JFrame();
         JTextArea bill = new JTextArea();
         receipt.setTitle("Order");
         receipt.setSize(350,500);
-        receipt.add(p);
 
         receipt.add(bill);
+        //header
         bill.setText("\tReceipt for {username}\n");
         bill.append("    ---------------------------------------------------------------------------");
-
+        
         bill.append("\nNoodles : "+n.getNoodles()+"\n");
         bill.append("\nSoup : "+ n.getSoup()+"\n");
         bill.append("\nTypeOfMeat : "+ n.getTypeOfMeat()+"\n");
         bill.append("\nCathchup : "+ Boolean.toString(n.getCathchup())+"\n");
         bill.append("\nAmount : "+ n.getAmount()+"\n");
         bill.append("\nPrice : "+ Integer.toString(n.getPrice())+"฿\n");
-        receipt.setVisible(true);
+        bill.append("    ---------------------------------------------------------------------------");
+        receipt.setVisible(true);}
+        catch(Exception er){
+            JOptionPane.showMessageDialog(null, "Please enter amount of noodle.");
+        }
     }};
 
 

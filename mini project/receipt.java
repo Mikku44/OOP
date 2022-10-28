@@ -1,16 +1,15 @@
-import java.sql.Date;
-
-public class receipt {
+import java.util.Date;
+public class Receipt {
     // กำหนดคุณสมบัติ
     private Date dateOrder;
     private String userName;
     private String[] orderMenu;
-    private int amountMenu;
-    private int total;
+    private int amountMenu = 0;
+    private int total = 0;
 
     // Method สำหรับ วันที่สั่งซื้อ
-    public void setdateOrder(Date dateOrder) {
-        this.dateOrder = dateOrder;
+    public void setdateOrder() {
+        this.dateOrder = new Date() ;
     }
 
     // Method สำหรับ ชื่อผู้สั่ง
@@ -25,12 +24,12 @@ public class receipt {
 
     // Method สำหรับ จำนวนเมนูทั้งหมด
     public void setamountMenu(int amountMenu) {
-        this.amountMenu = amountMenu;
+        this.amountMenu = this.amountMenu+amountMenu;
     }
 
     // Method สำหรับ ผลรวม
-    public void settotal() {
-        this.total = 35 * this.amountMenu;
+    public void settotal(int price) {
+        this.total = price * this.amountMenu;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +50,7 @@ public class receipt {
     }
 
     // Method สำหรับไว้ให้เรียกดูเส้น จำนวนเมนูทั้งหมด
-    public int getamountMen() {
+    public int getamountMenu() {
         return this.amountMenu;
     }
 
