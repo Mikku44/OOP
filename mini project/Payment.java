@@ -1,25 +1,27 @@
 public class Payment {
     // กำหนดคุณสมบัติ
-    private String typePayment;
-    private int pay;
-    private int change;
+    private String typePayment; //? ประเภท การชำระ
+    private int pay; //? จำนวนเงินการชำระ
+    private int change; //? เงินทอน
 
-    // Method สำหรับ
+    // Method สำหรับการกำหนดค่า วิธีการชำระ
     public void setPayment(String typePayment) {
         this.typePayment = typePayment;
     }
 
-    // Method สำหรับ
+    // Method สำหรับการกำหนดค่า จำนวนการชำระ
+    // setPay(25)
     public void setPay(int pay) {
         this.pay = pay;
     }
 
-    // Method สำหรับ
+    // Method สำหรับการกำหนดค่า เงินทอน
     public void setchange(int total) {
         this.change = this.pay - total;;
     }
     ////////////////////////////////////////////////////////////////////////
 
+    //ส่งค่าตัวแปร
     // Method สำหรับไว้ให้เรียกดู
     public String getPayment() {
         return this.typePayment;

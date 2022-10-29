@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class Gui {
     protected static Color primaryColor = new Color(0xE4FBFF);
     protected static Color secondaryColor = new Color(0xB8B5FF);
-    protected static Noodle n = new Noodle();
+    protected static Noodle n = new Noodle(); // การสร้าง object
     protected static Receipt r = new Receipt();
     protected static Payment p = new Payment();
-    protected static JTextField amountTF = new JTextField(10);
+    protected static JTextField amountTF = new JTextField(10);//? JTextField ช่องกรอกจำนวน
     protected static JTextField userTf = new JTextField(20);
-    protected static JButton Nbtn1 = new JButton("Yellow Noodles");
+    protected static JButton Nbtn1 = new JButton("Yellow Noodles"); //? JButton ปุ่มกดตามชื่อ
     protected static JButton Nbtn2 = new JButton("Rice Vermicelli");
     protected static JButton Nbtn3 = new JButton("Instant Noodles");
     protected static JButton Sbtn1 = new JButton("Tomyam soup");
@@ -27,22 +27,27 @@ public class Gui {
     protected static JButton Pbtn1 = new JButton("30");
     protected static JButton oBtn = new JButton("Continue");
     protected static JButton userBtn = new JButton("New Order");
-    protected static JFrame receipt = new JFrame();
-    protected static JFrame frame = new JFrame("Noodle NOOB");
+    protected static JFrame receipt = new JFrame();   //? JFrame หน้าต่างอันที่สอง
+    protected static JFrame frame = new JFrame("Noodle NOOB"); // ? JFrame หน้าต่างอันที่แรก
 
     public static void main(String[] args) {
 
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel();  //? JPanel คือส่วนในหน้าต่าง ส่วนบน
+
         JPanel panelCenter = new JPanel();
         JPanel panelCenter1 = new JPanel();
         JPanel panelCenter2 = new JPanel();
         JPanel panelCenter3 = new JPanel();
         JPanel panelCenter4 = new JPanel();
-        JPanel panelButtom = new JPanel();
+
+        JPanel panelButtom = new JPanel(); // ด้านล่าง
+
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
+
         JPanel emptyPanel = new JPanel();
-        JLabel title = new JLabel("NOODLE NOOB");
+
+        JLabel title = new JLabel("NOODLE NOOB");  //? JLabel ข้อความ
         JLabel description = new JLabel("Noodles :");
         JLabel Cdescription = new JLabel("Do you want cathchop :");
         JLabel Sdescription = new JLabel("Soup :");
@@ -53,10 +58,11 @@ public class Gui {
 
         // ?Noodles
 
-        Nbtn1.setBackground(primaryColor);
+        Nbtn1.setBackground(primaryColor); //? setBackground เป็นการกำหนดสี
         Nbtn2.setBackground(primaryColor);
         Nbtn3.setBackground(primaryColor);
-        Nbtn1.addActionListener(NoodlesBtn);
+
+        Nbtn1.addActionListener(NoodlesBtn); //? addActionListener กำหนดการนำทำเมื่อกดปุ่ม
         Nbtn2.addActionListener(NoodlesBtn);
         Nbtn3.addActionListener(NoodlesBtn);
 
@@ -64,6 +70,7 @@ public class Gui {
 
         Cbtn1.setBackground(primaryColor);
         Cbtn2.setBackground(primaryColor);
+
         Cbtn1.addActionListener(CathchupBtn);
         Cbtn2.addActionListener(CathchupBtn);
 
@@ -161,16 +168,17 @@ public class Gui {
         panelButtom.add(userBtn);
 
         frame.setSize(800, 600);
-        frame.add(panel, BorderLayout.NORTH);
-        frame.add(panelRight, BorderLayout.CENTER);
-        frame.add(panelLeft, BorderLayout.WEST);
-        frame.add(panelButtom, BorderLayout.SOUTH);
+        frame.add(panel, BorderLayout.NORTH);//? NORTH ด้านบน
+        frame.add(panelRight, BorderLayout.CENTER); // ? CENTER กลาง
+        frame.add(panelLeft, BorderLayout.WEST);// ? WEST ซ้าน
+        frame.add(panelButtom, BorderLayout.SOUTH);// ? SOUTH ล่าง
 
         frame.setVisible(true);
 
     }
 
     // ? Button Event
+    
     static ActionListener NoodlesBtn = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             JButton Source = (JButton) e.getSource();
