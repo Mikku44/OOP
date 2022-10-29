@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Gui {
-    protected static Color primaryColor = new Color(255, 240, 240);
-    protected static Color secondaryColor = new Color(255, 200, 100);
+    protected static Color primaryColor = new Color(0xE4FBFF);
+    protected static Color secondaryColor = new Color(0xB8B5FF);
     protected static Noodle n = new Noodle();
     protected static Receipt r = new Receipt();
     protected static Payment p = new Payment();
@@ -104,7 +104,7 @@ public class Gui {
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         // frame.setLayout(new GridLayout(0,1));
 
-        panel.setBackground(Color.white);
+        panel.setBackground(new Color(0xE4FBFF));
         panel.add(title);
         title.setIcon(new ImageIcon("icon.png"));
         title.setFont(new Font("Arial", Font.BOLD, 24));
@@ -156,7 +156,7 @@ public class Gui {
         panelRight.add(panelCenter1);
         panelRight.add(panelCenter4);
 
-        panelButtom.setBackground(Color.white);
+        panelButtom.setBackground(new Color(0xE4FBFF));
         panelButtom.add(oBtn);
         panelButtom.add(userBtn);
 
@@ -250,6 +250,9 @@ public class Gui {
             Pbtn1.setBackground(primaryColor);
             oBtn.setBackground(primaryColor);
 
+            userTf.setText("");
+            amountTF.setText("");
+
         }
     };
 
@@ -263,6 +266,7 @@ public class Gui {
     static ActionListener orderMenu = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try { // JButton Source =(JButton) e.getSource();
+                receipt.dispose();
                 receipt = new JFrame();
                 JTextArea bill = new JTextArea();
                 JScrollPane scroll = new JScrollPane(bill);
@@ -347,9 +351,17 @@ public class Gui {
                 pay.setBackground(Color.decode("#EEEEEE"));
                 pay.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        p.setPay(Integer.parseInt(Pay.getText()));
-                        p.setchange(r.gettotal());
-                        Change.setText(p.getchange()+" ฿");
+                        if ((p.getPayment()).equals("Cash")) {
+                            p.setPay(Integer.parseInt(Pay.getText()));
+                            if (p.getPay() < r.gettotal()) {
+                                JOptionPane.showMessageDialog(null, "Please pay more money than "+ r.gettotal()+" Baht");
+                                return;
+                            }
+                            p.setchange(r.gettotal());
+                            Change.setText(p.getchange() + " ฿");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Prompt Pay : 0622080994");
+                        }
 
                     }
                 });
@@ -358,7 +370,6 @@ public class Gui {
                 pp.setBounds(50, 50, 200, 200);
                 cash.setBounds(250, 50, 200, 200);
                 pay.setBounds(150, 400, 200, 24);
-
 
                 paymentPanel.setLayout(null);
                 paymentPanel.add(label);
